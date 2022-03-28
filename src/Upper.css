@@ -1,0 +1,229 @@
+@media (max-width: 1440px) {
+  .supreme-court-photo {
+    position: absolute;
+    width: 488px;
+    height: 600px;
+    left: 120px;
+    top: 120px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(.jpg); */
+    border-radius: 5px;
+  }
+
+  .upper-text-container {
+    position: absolute;
+    width: 712px;
+    height: 600px;
+    left: 608px;
+    top: 120px;
+
+    background: #ffffff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  .upper-header-container {
+    position: relative;
+    width: 570px;
+    height: 124px;
+    left: 40px;
+    top: 72px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 62px;
+
+    color: #1e222e;
+  }
+
+  .upper-body-container {
+    position: absolute;
+    width: 652px;
+    height: 155px;
+    left: 40px;
+    top: 228px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+
+    color: #000000;
+  }
+
+  .button-container {
+    position: absolute;
+    left: 40px;
+    top: 455px;
+  }
+
+  .header-button {
+    background: linear-gradient(266.33deg, #2649d8 0%, #494aff 99.63%);
+    border-radius: 5px;
+    width: 166px;
+    height: 48px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: white;
+  }
+}
+
+@media (max-width: 834px) {
+  .supreme-court-photo {
+    position: absolute;
+    width: 714px;
+    height: 600px;
+    left: 60px;
+    top: 120px;
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    border-radius: 5px;
+  }
+
+  .upper-text-container {
+    position: absolute;
+    width: 714px;
+    height: 387px;
+    left: 60px;
+    top: 720px;
+
+    background: #ffffff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  .upper-header-container {
+    position: relative;
+    width: 592px;
+    height: 110px;
+    left: 61px;
+    top: 40px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 55px;
+
+    color: #1e222e;
+  }
+
+  .upper-body-container {
+    position: absolute;
+    width: 592px;
+    height: 92px;
+    left: 61px;
+    top: 170px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+
+    color: #000000;
+  }
+
+  .button-container {
+    position: absolute;
+    left: 274px;
+    top: 302px;
+  }
+
+  .header-button {
+    background: linear-gradient(266.33deg, #2649d8 0%, #494aff 99.63%);
+    border-radius: 5px;
+    width: 166px;
+    height: 48px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: white;
+  }
+}
+
+@media (max-width: 390px) {
+  .supreme-court-photo {
+    position: absolute;
+    width: 390px;
+    height: 40px;
+    left: 0px;
+    top: 60px;
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://images.unsplash.com/photo-1524633712235-22da046738b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80");
+    border-radius: 5px;
+    z-index: -10;
+  }
+
+  .upper-text-container {
+    position: absolute;
+    width: 390px;
+    height: 440px;
+    left: 0px;
+    top: 60px;
+    background: #ffffff;
+    /* box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1); */
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .upper-header-container {
+    position: relative;
+    width: 350px;
+    height: 72px;
+    left: 20px;
+    top: 148px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36.46px;
+
+    color: #1e222e;
+  }
+
+  .upper-body-container {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    left: 0px;
+    top: 0px;
+    display: none;
+  }
+
+  .button-container {
+    position: absolute;
+    left: 112px;
+    top: 244px;
+  }
+
+  .header-button {
+    background: linear-gradient(266.33deg, #2649d8 0%, #494aff 99.63%);
+    border-radius: 5px;
+    width: 166px;
+    height: 48px;
+
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: white;
+  }
+}
+
