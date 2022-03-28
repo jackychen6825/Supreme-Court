@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "./Lower.css";
-import useWindowDimensions from "./WindowDimensions";
 
 export default function Lower() {
-  var width = useWindowDimensions();
   const justicesMap = {};
 
+  //populate the initial justice map --
   const generateJusticesFromApi = async () => {
-    const apiEndPoint =
+    const URL =
       "https://frontend-exercise-api.herokuapp.com/justices/?format=json";
 
-    fetch(apiEndPoint)
-      .then((res) => res.json())
-      .then((resJSON) => {
-        for (const justice of resJSON) {
-          let id = justice.id,
-            name = justice.name,
-            startDate = justice.start_date;
+    const response = await fetch(URL);
+    const resJSON = await response.json();
 
-          justicesMap[id] = { name, startDate, votes: 0 };
-        }
-      });
+    for (const justice of resJSON) {
+      const id = justice.id;
+      const name = justice.name;
+      const startDate = justice.start_date;
+
+      justicesMap[id] = { name, startDate, votes: 0 };
+    }
   };
-  const generateVotesFromApi = () => {
+
+  //populate the rest of the justice map information --
+  const generateVotesFromApi = async () => {
     let start = 1790,
       end = 2030;
 
@@ -44,68 +44,71 @@ export default function Lower() {
       promises.push(fetch(apiEndPoint).then((res) => res.json()));
     }
 
-    Promise.all(promises).then((cases) => {
-      for (const decade of cases) {
-        for (const date in decade) {
-          const { dissents, majority, other } = decade[date];
+    const cases = await Promise.all(promises);
 
-          dissents.forEach((id) => {
-            justicesMap[id] = {
-              ...justicesMap[id],
-              votes: justicesMap[id].votes + 1,
-            };
-          });
+    for (const decade of cases) {
+      for (const date in decade) {
+        const { dissents, majority, other } = decade[date];
 
-          majority.forEach((id) => {
-            justicesMap[id] = {
-              ...justicesMap[id],
-              votes: justicesMap[id].votes + 1,
-            };
-          });
+        dissents.forEach((id) => {
+          justicesMap[id] = {
+            ...justicesMap[id],
+            votes: justicesMap[id].votes + 1,
+          };
+        });
 
-          other.forEach((id) => {
-            justicesMap[id] = {
-              ...justicesMap[id],
-              votes: justicesMap[id].votes + 1,
-            };
-          });
-        }
+        majority.forEach((id) => {
+          justicesMap[id] = {
+            ...justicesMap[id],
+            votes: justicesMap[id].votes + 1,
+          };
+        });
+
+        other.forEach((id) => {
+          justicesMap[id] = {
+            ...justicesMap[id],
+            votes: justicesMap[id].votes + 1,
+          };
+        });
       }
-
-      generatePlotFromData(justicesMap);
-    });
+    }
   };
 
-  const generatePlotFromData = (info) => {
+  const generatePlotFromData = () => {
     const axis = [];
 
-    Object.keys(info).forEach((key) => {
-      let { votes, startDate } = info[key];
+    Object.keys(justicesMap).forEach((key) => {
+      let { votes, startDate } = justicesMap[key];
       startDate = startDate.split("T").shift();
       axis.push([startDate, votes]);
     });
 
-
     let w, h;
 
-    if (width <= 360) {
-      w = 350
-      h = 240
-    } else if (width > 360 && width <= 834) {
-      w = 714
-      h = 600
-    } else {
-      w = 1200
-      h  = 600
-    }
+    w = 1200;
+    h = 600;
+
+    // const svg = d3
+    //   .select(svgRef.current)
+    //   .attr("width", w)
+    //   .attr("height", h)
+    //   .attr("overflow", "visible")
+    //   .attr("margin-top", "100px")
+    //   .attr("margin-left", "50px");
+
+    d3.select(".data-container")
+      .append("div")
+      .classed("svg-container", true)
+      .append("svg")
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 1200 600")
+      .classed("svg-content-responsive", true);
 
     const svg = d3
-      .select(svgRef.current)
-      .attr("width", w)
-      .attr("height", h)
+      .select(".svg-content-responsive")
       .attr("overflow", "visible")
-      .attr("margin-top", "100px")
-      .attr("margin-left", "50px");
+      // .attr("margin-top", "100px")
+      // .attr("margin-left", "50px")
 
     var times = d3.extent(axis.map((pair) => new Date(pair[0])));
 
@@ -119,17 +122,9 @@ export default function Lower() {
 
     svg.append("g").call(yAxis);
 
-    svg
-      .append("text")
-      .attr("x", w / 2)
-      .attr("y", h + 50)
-      .text("Start Date");
+    svg.append("text").attr("x", 600).attr("y", 650).text("Start Date");
 
-    svg
-      .append("text")
-      .attr("y", h / 2)
-      .attr("x", -100)
-      .text("Votes");
+    svg.append("text").attr("y", 600).attr("x", -50).text("Votes");
 
     svg
       .selectAll()
@@ -139,20 +134,24 @@ export default function Lower() {
       .attr("cx", (d) => xScale(d[0]))
       .attr("cy", (d) => yScale(d[1]))
       .attr("r", 2);
-  };
+  };;
 
   const svgRef = useRef();
 
   useEffect(() => {
-    generateJusticesFromApi();
-    generateVotesFromApi();
-  }, [width]);
+    async function combined() {
+      await generateJusticesFromApi(); 
+      await generateVotesFromApi();
+      generatePlotFromData();
+    }
+
+    combined();
+  }, []);
 
   return (
     <div className="lower-container">
       <div className="data-header-container">Data</div>
-      <div className="data-container">
-        <svg ref={svgRef}></svg>
+      <div  className="data-container">
       </div>
     </div>
   );

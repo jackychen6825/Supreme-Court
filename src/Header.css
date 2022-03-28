@@ -2,7 +2,7 @@
 
 @media (max-width: 1440px) {
   .header-container {
-    width: 100%;
+    width: 1440px;
     height: 60px;
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
@@ -37,6 +37,7 @@
     left: 0%;
     right: 0%;
     top: 0%;
+    width: 834px;
 
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
@@ -65,7 +66,7 @@
     left: 0%;
     right: 0%;
     top: 0%;
-    width: 100%;
+    width: 390px;
 
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
