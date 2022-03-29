@@ -1,4 +1,58 @@
 @media (max-width: 1440px) {
+  .strip-1 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 458px;
+    top: 140px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-2 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 586px;
+    top: 140px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-3 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 140px;
+    top: 698px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
+  .strip-4 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 140px;
+    top: 570px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
   .supreme-court-photo {
     position: absolute;
     width: 488px;
@@ -73,10 +127,65 @@
     line-height: 21px;
     text-align: center;
     color: white;
+    border: aliceblue;
   }
 }
 
 @media (max-width: 834px) {
+  .strip-1 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 624px;
+    top: 140px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-2 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 752px;
+    top: 140px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-3 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 80px;
+    top: 698px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
+  .strip-4 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 80px;
+    top: 570px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
   .supreme-court-photo {
     position: absolute;
     width: 714px;
@@ -151,20 +260,76 @@
     line-height: 21px;
     text-align: center;
     color: white;
+    border: aliceblue;
   }
 }
 
 @media (max-width: 390px) {
+  .strip-1 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 240px;
+    top: 80px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-2 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 368px;
+    top: 80px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    transform: rotate(-180deg);
+
+    z-index: 10;
+  }
+
+  .strip-3 {
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    left: 20px;
+    top: 478px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
+  .strip-4 {
+    position: absolute;
+    width: 2px;
+    height: 130px;
+    left: 20px;
+    top: 350px;
+
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    z-index: 10;
+  }
+
   .supreme-court-photo {
     position: absolute;
     width: 390px;
-    height: 40px;
+    height: 440px;
     left: 0px;
     top: 60px;
 
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://images.unsplash.com/photo-1524633712235-22da046738b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      url("https://images.unsplash.com/photo-1524633712235-22da046738b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80");
     border-radius: 5px;
-    z-index: -10;
+    /* z-index: -10; */
   }
 
   .upper-text-container {
@@ -173,11 +338,10 @@
     height: 440px;
     left: 0px;
     top: 60px;
-    background: #ffffff;
-    /* box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1); */
     border-radius: 5px;
     display: flex;
     justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .upper-header-container {
@@ -193,7 +357,7 @@
     font-size: 28px;
     line-height: 36.46px;
 
-    color: #1e222e;
+    color: white;
   }
 
   .upper-body-container {
@@ -224,6 +388,6 @@
     line-height: 21px;
     text-align: center;
     color: white;
+    border: aliceblue;
   }
 }
-

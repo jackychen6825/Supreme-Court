@@ -75,57 +75,84 @@ export default function Lower() {
   };
 
   const generatePlotFromData = () => {
-    const axis = [];
+    //get the necessary values width and height ---
+    const container = document.getElementById("svg-container");
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+
+    //get the x and y coordinates for each circle ---
+    var axis = [];
 
     Object.keys(justicesMap).forEach((key) => {
       let { votes, startDate } = justicesMap[key];
       startDate = startDate.split("T").shift();
-      axis.push([startDate, votes]);
+
+      //pushing different values based on the current width (either face value or in thousands)
+      if (w <= 350) {
+        axis.push([startDate, votes / 1000]);
+      } else {
+        axis.push([startDate, votes]);
+      }
     });
 
-    let w, h;
+    //remove the current svg and the chart to render a new one ---
+    d3.select("svg").remove();
 
-    w = 1200;
-    h = 600;
-
-    // const svg = d3
-    //   .select(svgRef.current)
-    //   .attr("width", w)
-    //   .attr("height", h)
-    //   .attr("overflow", "visible")
-    //   .attr("margin-top", "100px")
-    //   .attr("margin-left", "50px");
-
-    d3.select(".data-container")
-      .append("div")
-      .classed("svg-container", true)
+    //select the container div and append the new svg
+    d3.select("#svg-container")
       .append("svg")
-      .attr("preserveAspectRatio", "xMinYMin meet")
-      .attr("viewBox", "0 0 1200 600")
-      .classed("svg-content-responsive", true);
+      .attr("width", w)
+      .attr("height", h);
 
-    const svg = d3
-      .select(".svg-content-responsive")
+    //select the newly appended svg and render chart below ---
+    var svg = d3
+      .select("svg")
       .attr("overflow", "visible")
-      // .attr("margin-top", "100px")
-      // .attr("margin-left", "50px")
+      .attr("margin-top", "100px")
+      .attr("margin-left", "50px");
 
     var times = d3.extent(axis.map((pair) => new Date(pair[0])));
 
     const xScale = d3.scaleTime().domain(times).range([0, w]);
-    const yScale = d3.scaleLinear().domain([0, 9000]).range([h, 0]);
+
+    let yScale;
+
+    if (w <= 350) {
+      yScale = d3.scaleLinear().domain([0, 9]).range([h, 0]);
+    } else {
+      yScale = d3.scaleLinear().domain([0, 9000]).range([h, 0]);
+    }
 
     const xAxis = d3.axisBottom(xScale).ticks(10);
     const yAxis = d3.axisLeft(yScale).ticks(10);
 
+    //setting the axis
     svg.append("g").attr("transform", `translate(0, ${h})`).call(xAxis);
-
     svg.append("g").call(yAxis);
 
-    svg.append("text").attr("x", 600).attr("y", 650).text("Start Date");
+    //creating axis labels based on the width
+    if (w <= 350) {
+      svg
+        .append("text")
+        .attr("x", w / 2)
+        .attr("y", h + 30)
+        .attr("font-size", 10)
+        .text("Start Date");
+      svg
+        .append("text")
+        .attr("y", -10)
+        .attr("font-size", 10)
+        .text("Votes in 000's");
+    } else {
+      svg
+        .append("text")
+        .attr("x", w / 2)
+        .attr("y", h + 40)
+        .text("Start Date");
+      svg.append("text").attr("y", -10).text("Votes");
+    }
 
-    svg.append("text").attr("y", 600).attr("x", -50).text("Votes");
-
+    //plotting the circles
     svg
       .selectAll()
       .data(axis.map((data) => [new Date(data[0]), data[1]]))
@@ -134,13 +161,14 @@ export default function Lower() {
       .attr("cx", (d) => xScale(d[0]))
       .attr("cy", (d) => yScale(d[1]))
       .attr("r", 2);
-  };;
+  };
 
-  const svgRef = useRef();
+  //when the window is resized, generate the scatter plot again
+  window.addEventListener("resize", generatePlotFromData);
 
   useEffect(() => {
     async function combined() {
-      await generateJusticesFromApi(); 
+      await generateJusticesFromApi();
       await generateVotesFromApi();
       generatePlotFromData();
     }
@@ -151,8 +179,7 @@ export default function Lower() {
   return (
     <div className="lower-container">
       <div className="data-header-container">Data</div>
-      <div  className="data-container">
-      </div>
+      <div id="svg-container" className="data-container"></div>
     </div>
   );
 }
